@@ -24,6 +24,7 @@ client.connect(err => {
 app.use(cors())
     .use(morgan("dev"))
     .use(express.json()
+    .use(express.static('public'))
 );
 
 //get top planets
