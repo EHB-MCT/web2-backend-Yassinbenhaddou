@@ -1,0 +1,260 @@
+/* colors:  #1b1b4d , #575ba8 , #675ca8 , #a3a3a3 , #e8e8ea */
+
+
+@font-face {
+    font-family: 'nikkyou';
+    src: url('../fonts/NikkyouSans-B6aV.ttf');
+}
+
+@font-face {
+    font-family: 'exoplan';
+    src: url('../fonts/Exoplanetaria-gxxJ5.ttf');
+}
+
+body { 
+    margin: 0;
+}
+
+.header 
+{
+    overflow: hidden;
+    background-color: #1b1b4d;
+    padding: 20px 10px;
+}
+
+.header div
+{
+    margin-right: 10%;
+}
+
+.header div.logInDiv a{
+    font-family: 'nikkyou';
+    display: block;
+    color:  #be90d6;
+    text-align: center;
+    padding: 8px 14px;
+    text-decoration: none;
+    font-size: 18px;
+    border: solid #c07fe4;
+    float: right;
+   
+}
+  
+.header a {
+    
+    float: left;
+    color: #e8e8ea;
+    text-align: center;
+    font-family: 'Roboto';
+    font-weight: bold;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px; 
+    line-height: 25px;
+   
+}
+  
+.header a.logo {
+    margin-left: 10%;
+    font-size: 25px;
+    font-weight: bold;
+}
+  
+.header a:hover {
+    background-color: #ddd;
+    color: black;
+}
+  
+.header a#active {
+    background-color: #675ca8;
+    color: #e8e8ea;
+}
+  
+.header-right {
+    float: right;
+}
+
+main .container
+{
+
+    margin: 0% 10% 2% 10%
+}
+
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+  }
+  
+  
+.card button {
+    font-weight: bold;
+    display: block;
+    color:  #1b1b4d;
+    text-align: center;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 24px;
+    border: solid #1b1b4d;
+    width: 100%;
+}
+  
+.card button:hover {
+    background-color: #675ca8;
+    color: #e8e8ea;
+}
+
+
+
+.card img{
+    width: 100%;
+}
+  
+
+
+
+.planet {
+    cursor: pointer;
+    display: inline-block;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 20%;
+    margin: 2%;
+    background-color: #675ca8;
+    color: #e8e8ea;
+    
+}
+
+.planet img
+{
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-top:10%;
+   
+}
+  
+.planet:hover {
+    box-shadow: 0 8px 16px 0 rgb(56, 1, 82);
+}
+  
+
+.info{
+    height:50px;
+    background-color: #1b1b4d;
+}
+
+.info h4{
+    font: 1em sans-serif;
+    font-weight: bolder;
+    display: block;
+    color:  #e8e8ea;
+    text-align: center;
+    padding: 4px 10px;
+    font-size: 20px;
+    font-variant-caps: unset;
+}
+
+
+
+/************************************/
+
+/**planet info**/
+
+.wrapper {
+    height: 550px;
+    width: 720px;
+    margin: 50px auto;
+    background-color: #675ca8;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)
+
+}
+  
+.planet-img {
+    
+    float: left;
+    height: 480px;
+    width: 372px;
+}
+  
+.planet-info {
+    float: left;
+    height: 550px;
+    width: 348px;
+    background-color: #575ba8;
+}
+  
+.planet-text {
+    background-color: #575ba8;
+    height: 480px;
+    width: 327px;
+}
+
+
+.planet-text .iDiv i {
+    color: #f2f2f3;
+    display: inline-block;
+    font-size:35px;
+}
+
+.planet-text .iDiv i.bi-x-lg {
+    margin-left: 72%;
+}
+
+.planet-text .iDiv i.bi-star, i.bi-star-fill{
+    margin-left: 5%;
+    color: #e8e8ea;
+}
+  
+.planet-text h1 {
+    margin: 0 0 0 5%;
+    padding-top: 52px;
+    font-size: 34px;
+    color: #e8e8ea;
+}
+  
+.planet-text h1 {
+    font-family: 'nikkyou', sans-serif; 
+}
+  
+
+  
+.planet-text p {
+    height: 130px;
+    margin: 0 0 0 5%;
+    font-family: 'exoplan', serif;
+    color: #e8e8ea;
+    line-height: 1.7em;
+    font-size: 0.8em;
+    font-weight: lighter;
+    
+}
+
+.planet-text p.aboutText {
+
+    margin-top: 20%;
+    
+}
+  
+  
+  
+  
+span {
+    font-family: 'exoplan', serif;
+    font-weight: bolder;
+    font-size: 1.3em;
+    line-height: 0.9em;
+}
+  
+  
+
+
+
+
+
+

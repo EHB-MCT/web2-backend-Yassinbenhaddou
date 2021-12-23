@@ -1,0 +1,29 @@
+{
+  "name": "web2-backend-yassinbenhaddou",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EHB-MCT/web2-backend-Yassinbenhaddou.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EHB-MCT/web2-backend-Yassinbenhaddou/issues"
+  },
+  "homepage": "https://github.com/EHB-MCT/web2-backend-Yassinbenhaddou#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^4.2.1",
+    "morgan": "^1.10.0",
+    "node": "^17.2.0"
+  }
+}
