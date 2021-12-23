@@ -1,12 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 const axios = require('axios').default;
 const app = express();
 
 const port = process.env.PORT || 3000;
+
+const myDataBase = "web2-taak";
 
 
 
@@ -25,13 +27,13 @@ app.use(cors())
 );
 
 //get top planets
-app.get('/getBestPlanets', async (req,res) => {
+app.get('/planets', async (req,res) => {
 
     try{
         //connect to the db
         await client.connect();
 
-        const db = client.db('web2-taak').collection('planets');
+        const db = client.db(myDataBase).collection('planets');
         const bpl = await db.find({}).toArray();
 
         //Send back the data with the response
@@ -48,18 +50,54 @@ app.get('/getBestPlanets', async (req,res) => {
 });
 
 //put planets votes
+app.put('/planets/:id', async (req,res) => {
+    
 
+    try{
+         //connect to the db
+        await client.connect();
+
+         //retrieve the planets collection data
+        const colli = client.db('web2-taak').collection('planets');
+         
+        
+         // Create the new planet object
+        let newChallenge = {
+          
+            votes: req.body.votes,
+            
+        }
+        
+         // Insert into the database
+        let updateResult = await colli.updateOne({_id: ObjectId(req.params.id)}, 
+        {$set: newChallenge});
+
+         //Send back successmessage
+        res.status(201).json(updateResult);
+        return;
+    }catch(error){
+        console.log(error);
+        res.status(500).send({
+            error: 'Something went wrong',
+            value: error
+        });
+    }finally {
+        await client.close();
+    }
+});
+
+                /**************************COMMENTS******************************/
 
 
 //get comments
-app.get('/getComments', async (req,res) => {
+app.get('/comments', async (req,res) => {
 
     try{
         //connect to the db
         await client.connect();
 
-        //retrieve the boardgame collection data
-        const db = client.db('web2-taak').collection('comments');
+        //connect to comment collection data
+        const db = client.db(myDataBase).collection('comments');
         const com = await db.find({}).toArray();
 
         //Send back the data with the response
@@ -76,18 +114,15 @@ app.get('/getComments', async (req,res) => {
 });
 
 
-
-
-
 //post comments
-app.post('/postComment', async (req, res) => {
+app.post('/comments', async (req, res) => {
 
     try{
         //connect to the db
         await client.connect();
 
-        //retrieve the boardgame collection data
-        const colli = client.db('web2-taak').collection('comments');
+        //retrieve the comments collection data
+        const colli = client.db(myDataBase).collection('comments');
         
         // add the new comment 
         let newComment = {
@@ -114,12 +149,93 @@ app.post('/postComment', async (req, res) => {
     }
 });
 
+//Update COMMENTS
+app.put('/comments/:id', async (req,res) => {
+    
+    // Check for id in url
+    if(!req.params.id){
+        res.status(400).send({
+            error: 'Bad Request',
+            value: 'Missing id in url'
+        });
+        return;
+    }
+
+    try{
+         //connect to the db
+        await client.connect();
+
+         //retrieve the comments collection data
+        const colli = client.db('web2-taak').collection('comments');
+
+         // Validation for comments
+        const comm = await colli.findOne({_id: ObjectId(req.params.id)});
+        if(!comm){
+            res.status(400).send({
+                error: 'Bad Request',
+                value: `Challenge does not exist with id ${req.params.id}`
+            });
+            return;
+        } 
+         // Create the new comments object
+        let newChallenge = {
+            
+            comment: req.body.comment,
+            likes: req.body.likes,
+            dislikes: req.body.dislikes
+        }
+
+        // Insert into the database
+        let updateResult = await colli.updateOne({_id: ObjectId(req.params.id)}, 
+        {$set: newChallenge});
+
+         //Send back successmessage
+        res.status(201).json(updateResult);
+        return;
+    }catch(error){
+        console.log(error);
+        res.status(500).send({
+            error: 'Something went wrong',
+            value: error
+        });
+    }finally {
+        await client.close();
+    }
+});
 
 
+//DELETE COMMENTS
+app.delete('/comments/:id', async (req,res) => {
+ 
+    try{
+         //connect to the db
+        await client.connect();
+
+         //retrieve the comments collection data
+        const colli = client.db('web2-taak').collection('comments');
+
+         // Validation for double 
+        let result = await colli.deleteOne({_id: ObjectId(req.params.id)});
+         //Send back successmessage
+        res.status(201).json(result);
+        return;
+    }catch(error){
+        console.log(error);
+        res.status(500).send({
+            error: 'Something went wrong',
+            value: error
+        });
+    }finally {
+        await client.close();
+    }
+});
+
+
+/***********************************LOGIN / REGISTER*******************************************/
 //Add user
 app.post('/register', async (req, res) => {
     await client.connect();
-    const db = client.db('web2-taak');
+    const db = client.db(myDataBase);
     const user = {
         ...req.body
     }
@@ -149,11 +265,11 @@ app.post('/register', async (req, res) => {
 
 })
 
-
+//login
 app.post('/login', async (req, res) => {
     const user = { ...req.body }
     await client.connect()
-    const db = client.db('web2-taak');
+    const db = client.db(myDataBase);
     db.collection('login-data').findOne({ email: user.email })
         .then(found => {
             if (found) {
