@@ -129,11 +129,8 @@ app.post('/comments', async (req, res) => {
         // add the new comment 
         let newComment = {
             userId: req.body.userId,
-            userEmail: req.body.userEmail,
-            userName:req.body.userName,
             comment: req.body.comment,
-            likes: req.body.likes,
-            dislikes: req.body.dislikes
+
         }
         
         // Insert into the database
@@ -185,8 +182,8 @@ app.put('/comments/:id', async (req,res) => {
         let newChallenge = {
             
             comment: req.body.comment,
-            likes: req.body.likes,
-            dislikes: req.body.dislikes
+            //likes: req.body.likes,
+            //dislikes: req.body.dislikes
         }
 
         // Insert into the database
